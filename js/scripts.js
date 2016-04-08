@@ -12,33 +12,26 @@ var CommentBox = React.createClass({
 var TransportGame = React.createClass({
   getInitialState: function() {
     return {
-      transport: {
-        "_id": {
-            "$oid": "56deb08ec2655898037b65ba"
-        },
-        "number": "97",
-        "type": "tram",
-        "backgroundColor": "#991f36",
-        "foregroundColor": "white",
-        "__v": 0
-    }
+      transport: {},
+      displayedTransport: {}
     };
   },
-  /*componentDidMount: function() {
+  componentDidMount: function() {
     this.serverRequest = $.get(this.props.source, function(result) {
       console.log(result);
-			this.setState({
-        transport: result[0]
+      this.setState({
+        transport: result.transport,
+        displayedTransport: result.displayedTransport
       });
     }.bind(this));
   },
   componentWillUnmount: function() {
     this.serverRequest.abort();
-  },*/
+  },
   render: function() { 
 		return (
             <div className="game">
-			 <TransportNumber transport={this.state.transport}/>
+			 <TransportNumber transport={this.state.displayedTransport}/>
 		  </div>
         );
   }
@@ -62,6 +55,6 @@ var TransportNumber = React.createClass({
 
 
 ReactDOM.render(
-  <TransportGame source="https://node-test-nbwns.c9.io/transports" />,
+  <TransportGame source="https://node-test-nbwns.c9.io/transport/game/random" />,
   document.getElementById('container')
 );
