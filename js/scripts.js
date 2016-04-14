@@ -38,24 +38,45 @@ var TransportGame = React.createClass({
   render: function() { 
 		return (
       <div className="game">
-			 <TransportNumber transport={this.state.displayedTransport}/>
-       <TransportYesNoButtons transport={this.state.transport} displayedTransport={this.state.displayedTransport} onChange={this.changeHandler}/>
-       <div className="score">Score: {this.state.score} sur {this.state.total}</div>
+			 <div className="table-row">
+        <TransportNumber transport={this.state.displayedTransport}/>
+       </div>
+       <div className="table-row">
+        <TransportYesNoButtons transport={this.state.transport} displayedTransport={this.state.displayedTransport} onChange={this.changeHandler}/>
+       </div>
+       <div className="table-row">
+        <div className="score">Score: {this.state.score} sur {this.state.total}</div>
+       </div>
 		  </div>
 
         );
   }
 });
 
+var TransportGoodAnswer = React.createClass({
+  render: function(){
+      return (
+      <div class="good-answer">
+        <span>Voici la bonne réponse</span>
+        <TransportNumber transport={this.state.transport} className="mini" />
+      </div>
+    );
+  }
+});
+
 var TransportYesNoButtons = React.createClass({
-  /*getInitialState: function() {
-    
-  },*/
+  getInitialState: function() {
+      return {
+          disabled: false
+      };
+  },
   propTypes: {
         onChange:   React.PropTypes.func
   },
   handleClick: function(answer) {
-    console.log(this);
+    this.setState({
+        disabled: true
+    });
     var correctColor = this.props.transport.backgroundColor == this.props.displayedTransport.backgroundColor;
     var win = false;
     if(answer == true){
@@ -72,16 +93,20 @@ var TransportYesNoButtons = React.createClass({
     if(typeof this.props.onChange === 'function') {
       this.props.onChange(win);
     }
+
+    this.setState({
+        disabled: false
+    });
     
   },
   render: function() {
     return (
-      <div>
-        <button onClick={this.handleClick.bind(this, true)}>
-          Oui
+      <div className="button-group">
+        <button className="btn yes" onClick={this.handleClick.bind(this, true)} disabled={this.state.disabled}>
+          <i className="fa fa-check"></i>
         </button>
-        <button onClick={this.handleClick.bind(this, false)}>
-          Non
+        <button className="btn no" onClick={this.handleClick.bind(this, false)} disabled={this.state.disabled}>
+          <i className="fa fa-times"></i>
         </button>
       </div>
     );
@@ -97,7 +122,7 @@ var TransportNumber = React.createClass({
             
         };
 		return (
-            <div className="transport" style={divStyle}>
+            <div className="transport {this.props.className}" style={divStyle}>
                 {this.props.transport.number}
             </div>
         );

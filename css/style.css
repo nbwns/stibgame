@@ -1,1 +1,74 @@
-# Empty CSS file for your own CSS
+body{
+	font-family: "Arial";
+	margin:0;
+}
+
+#board{
+	margin-left: auto;
+  	margin-right: auto;
+  	width: 500px;
+}
+
+#board h1{
+	text-align: center;
+}
+
+#board #container, .game{
+	width: 50%;
+    margin: 0 auto; 
+}
+
+.game{
+	display:table;
+	width: 120px;
+}
+
+.table-row{
+	display:table-row;
+}
+
+.transport{
+	width: 120px;
+	height: 120px;
+	border-radius: 20px;
+	text-align: center;
+	margin-left: 15px;
+	display: table-cell; 
+	vertical-align: middle;
+	font-size: 60px;
+}
+
+.button-group{
+	margin-top:15px;
+	text-align: center;
+}
+
+.btn{
+	border: 0px;
+	font-size: 25px;
+	color: white;
+	border-radius: 5px;
+	padding: 5px;
+	margin: 5px;
+	width: 45px;
+	height: 45px;
+	cursor: pointer;
+}
+
+.btn:disabled{
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+	.btn.yes{
+		background-color: #00B247;
+	}
+
+	.btn.no{
+		background-color: #FF0F00;
+	}
+
+.score{
+	margin-top:15px;
+	text-align: center;
+}
